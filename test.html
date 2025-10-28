@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyvex Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .test-links {
+            margin: 10px 0;
+        }
+        .test-links a {
+            display: block;
+            margin: 5px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .test-links a:hover {
+            background: #f0f0f0;
+        }
+        .description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛡️ Cyvex Extension Test Page</h1>
+    <p>This page contains various types of links to test the Cyvex Chrome extension's phishing detection capabilities.</p>
+
+    <div class="test-section">
+        <h2>Safe Links (Should show ✅)</h2>
+        <div class="description">These are legitimate, safe websites that should be marked as safe.</div>
+        <div class="test-links">
+            <a href="https://www.google.com">Google Search</a>
+            <a href="https://www.github.com">GitHub</a>
+            <a href="https://www.stackoverflow.com">Stack Overflow</a>
+            <a href="https://www.wikipedia.org">Wikipedia</a>
+            <a href="https://www.microsoft.com">Microsoft</a>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Shortened URLs (Should show ⚠️)</h2>
+        <div class="description">These are shortened URLs that should trigger a warning due to their suspicious nature.</div>
+        <div class="test-links">
+            <a href="https://bit.ly/3abc123">Bit.ly shortened link</a>
+            <a href="https://tinyurl.com/xyz789">TinyURL shortened link</a>
+            <a href="https://t.co/def456">Twitter shortened link</a>
+            <a href="https://goo.gl/ghi789">Google shortened link</a>
+            <a href="https://short.link/jkl012">Generic shortened link</a>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Suspicious Patterns (Should show ⚠️)</h2>
+        <div class="description">These URLs have suspicious characteristics that should trigger warnings.</div>
+        <div class="test-links">
+            <a href="https://g00gle.com">Typosquatting (g00gle instead of google)</a>
+            <a href="https://paypal-security-verification.com">Suspicious subdomain</a>
+            <a href="https://amazon-account-update.net">Suspicious domain structure</a>
+            <a href="https://facebook-login-verification.org">Suspicious verification site</a>
+            <a href="https://apple-id-confirmation.info">Suspicious confirmation site</a>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Mixed Content</h2>
+        <div class="description">A mix of different types of links to test overall functionality.</div>
+        <div class="test-links">
+            <a href="https://www.apple.com">Apple (Safe)</a>
+            <a href="https://bit.ly/suspicious">Suspicious shortened URL</a>
+            <a href="https://www.netflix.com">Netflix (Safe)</a>
+            <a href="https://bank-verification-urgent.com">Urgent bank verification (Suspicious)</a>
+            <a href="https://www.amazon.com">Amazon (Safe)</a>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Instructions</h2>
+        <ol>
+            <li>Install the Cyvex Chrome extension</li>
+            <li>Refresh this page</li>
+            <li>Look for small indicators next to each link</li>
+            <li>Click the Cyvex icon in your toolbar to see the popup</li>
+            <li>Press Ctrl+Shift+C to toggle the security overlay</li>
+            <li>Right-click the Cyvex icon and select "Options" to configure settings</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Expected Results</h2>
+        <ul>
+            <li><strong>Safe links:</strong> Should show ✅ (green checkmark)</li>
+            <li><strong>Shortened URLs:</strong> Should show ⚠️ (yellow warning)</li>
+            <li><strong>Suspicious patterns:</strong> Should show ⚠️ (yellow warning)</li>
+            <li><strong>Known phishing domains:</strong> Should show 🚨 (red danger)</li>
+        </ul>
+    </div>
+
+    <script>
+        // Add some dynamic content to test real-time scanning
+        setTimeout(() => {
+            const dynamicSection = document.createElement('div');
+            dynamicSection.className = 'test-section';
+            dynamicSection.innerHTML = `
+                <h2>Dynamic Content (Added after page load)</h2>
+                <div class="description">These links are added dynamically to test real-time scanning.</div>
+                <div class="test-links">
+                    <a href="https://www.youtube.com">YouTube (Safe)</a>
+                    <a href="https://bit.ly/dynamic123">Dynamic shortened URL</a>
+                    <a href="https://www.linkedin.com">LinkedIn (Safe)</a>
+                </div>
+            `;
+            document.body.appendChild(dynamicSection);
+        }, 3000);
+    </script>
+</body>
+</html>

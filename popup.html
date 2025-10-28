@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyvex Security Status</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">Cyvex</span>
+      </div>
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-icon">✅</span>
+        <span class="status-text">Secure</span>
+      </div>
+    </header>
+
+    <main class="popup-main">
+      <section class="security-summary">
+        <h2>Current Page Security</h2>
+        <div class="summary-stats" id="summaryStats">
+          <div class="stat-item">
+            <span class="stat-number" id="safeCount">0</span>
+            <span class="stat-label">Safe Links</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="warningCount">0</span>
+            <span class="stat-label">Warnings</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="dangerCount">0</span>
+            <span class="stat-label">Dangerous</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="security-tip">
+        <h3>💡 Security Tip</h3>
+        <div class="tip-content" id="tipContent">
+          Loading security tip...
+        </div>
+        <button class="tip-button" id="newTipBtn">New Tip</button>
+      </section>
+
+      <section class="recent-scans">
+        <h3>Recent Scans</h3>
+        <div class="scan-list" id="scanList">
+          <div class="scan-item">
+            <span class="scan-url">No recent scans</span>
+            <span class="scan-status">-</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <button class="action-btn" id="scanPageBtn">
+          <span class="btn-icon">🔍</span>
+          Scan This Page
+        </button>
+        <button class="action-btn" id="viewSettingsBtn">
+          <span class="btn-icon">⚙️</span>
+          Settings
+        </button>
+      </section>
+    </main>
+
+    <footer class="popup-footer">
+      <div class="footer-info">
+        <span>Cyvex v1.0.0</span>
+        <span>•</span>
+        <span>Always protecting</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

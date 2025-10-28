@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyvex Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-container">
+    <header class="options-header">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">Cyvex Settings</span>
+      </div>
+    </header>
+
+    <main class="options-main">
+      <section class="settings-section">
+        <h2>General Settings</h2>
+        
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="autoScanEnabled" checked>
+            <span class="checkmark"></span>
+            Enable automatic link scanning
+          </label>
+          <p class="setting-description">Automatically scan all links on web pages for security threats</p>
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="showOverlay" checked>
+            <span class="checkmark"></span>
+            Show security overlay
+          </label>
+          <p class="setting-description">Display the security status overlay on web pages</p>
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="blockDangerous" checked>
+            <span class="checkmark"></span>
+            Block dangerous links
+          </label>
+          <p class="setting-description">Show warning dialog before allowing access to dangerous links</p>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Security Preferences</h2>
+        
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="checkShortenedUrls" checked>
+            <span class="checkmark"></span>
+            Flag shortened URLs
+          </label>
+          <p class="setting-description">Mark shortened URLs (bit.ly, tinyurl, etc.) as potentially suspicious</p>
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="checkSuspiciousPatterns" checked>
+            <span class="checkmark"></span>
+            Check for suspicious patterns
+          </label>
+          <p class="setting-description">Analyze URLs for typosquatting and other suspicious characteristics</p>
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="showTips" checked>
+            <span class="checkmark"></span>
+            Show security tips
+          </label>
+          <p class="setting-description">Display cybersecurity awareness tips in the popup and overlay</p>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Database Management</h2>
+        
+        <div class="database-info">
+          <div class="info-item">
+            <span class="info-label">AbuseIPDB API Key:</span>
+            <span class="info-value" id="apiKeyStatus">Not set</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Last Updated:</span>
+            <span class="info-value" id="lastUpdated">Loading...</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Phishing Domains:</span>
+            <span class="info-value" id="domainCount">N/A (using AbuseIPDB)</span>
+          </div>
+        </div>
+
+        <div class="database-actions">
+          <button class="action-btn" id="updateDatabaseBtn">
+            <span class="btn-icon">🔄</span>
+            Refresh Cache
+          </button>
+          <button class="action-btn" id="clearCacheBtn">
+            <span class="btn-icon">🗑️</span>
+            Clear Cache
+          </button>
+          <div style="flex-basis: 100%"></div>
+          <input type="password" id="apiKeyInput" placeholder="Enter AbuseIPDB API Key" style="flex:1; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px;">
+          <button class="action-btn" id="saveApiKeyBtn">
+            <span class="btn-icon">💾</span>
+            Save API Key
+          </button>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>About Cyvex</h2>
+        
+        <div class="about-info">
+          <div class="version-info">
+            <strong>Version:</strong> 1.0.0
+          </div>
+          <div class="description">
+            <p>Cyvex is a Chrome extension designed to protect small and medium enterprises from phishing attacks through real-time link checking and cybersecurity awareness education.</p>
+          </div>
+          <div class="features-list">
+            <h3>Key Features:</h3>
+            <ul>
+              <li>Real-time link scanning</li>
+              <li>Phishing database integration</li>
+              <li>Visual safety indicators</li>
+              <li>Security awareness tips</li>
+              <li>Zero setup required</li>
+              <li>No cost to use</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="options-footer">
+      <div class="footer-actions">
+        <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+        <button class="btn btn-secondary" id="resetSettingsBtn">Reset to Defaults</button>
+      </div>
+      <div class="footer-info">
+        <span>© 2024 Cyvex. Making cybersecurity accessible for everyone.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
