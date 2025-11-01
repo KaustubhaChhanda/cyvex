@@ -1,8 +1,36 @@
-# Cyvex - Phishing Protection Chrome Extension
+# Cyvex - Phishing Protection Browser Extension
 
 🛡️ **Protect your business from phishing attacks with real-time link checking and cybersecurity awareness tips**
 
-Cyvex is a Chrome extension designed specifically for Small and Medium Enterprises (SMEs) that provides zero-setup, no-cost phishing protection with a focus on non-technical usability.
+## What This Project Does
+
+Cyvex is a comprehensive browser extension that provides **real-time phishing protection** and **cybersecurity training** for businesses and individuals. Here's what it does:
+
+### 🛡️ Real-Time Phishing Protection
+- **Automatically scans all links** on every webpage you visit
+- **Checks link safety** by resolving domains to IP addresses and querying threat intelligence databases
+- **Displays visual warnings** (colored badges) next to dangerous or suspicious links
+- **Protects you before you click** by showing link safety status in real-time
+
+### 🤖 AI-Powered Security Training
+- **CyvexBot chatbot** provides 24/7 security education and answers questions
+- **Context-aware assistance** that understands what links you're viewing
+- **Interactive learning** with quick-reply buttons for common security topics
+- **No technical knowledge required** - designed for non-technical users
+
+### 📊 Security Awareness & Monitoring
+- **Security overlay** with keyboard shortcut (Ctrl+Shift+X) to view page security statistics
+- **Security tips** displayed randomly to help users learn best practices
+- **Scan history** and detailed link analysis in the extension popup
+- **Real-time statistics** showing safe, warning, and dangerous links on each page
+
+### 🎯 Designed for Small & Medium Businesses
+- **Zero-setup required** - works immediately after installation
+- **No-cost protection** - optional free API key for enhanced features
+- **Privacy-focused** - no data collection, no tracking
+- **Easy to use** - visual indicators and simple interface
+
+Cyvex combines automated threat detection with human-friendly security education, making it perfect for SMEs who need strong cybersecurity protection without complex IT infrastructure.
 
 ## Features
 
@@ -40,9 +68,10 @@ Cyvex is a Chrome extension designed specifically for Small and Medium Enterpris
 
 ### 🚀 Zero Setup Required
 
-- No configuration needed
+- No configuration needed (optional AbuseIPDB API key for enhanced protection)
 - Works immediately after installation
 - No technical knowledge required
+- Optional API key can be added in settings for better threat detection
 
 ## Installation
 
@@ -88,23 +117,48 @@ Cyvex is a Chrome extension designed specifically for Small and Medium Enterpris
   - 🔒 Security tips
   - ⚠️ Found dangerous link?
 - Clear chat history or minimize anytime
-- **See [CHATBOT_GUIDE.md](CHATBOT_GUIDE.md) for detailed usage**
+- Conversation history is stored locally and never shared
 
 ## How It Works
 
-### Malicious Site Detection
+### Malicious Site Detection Process
 
-1. **DNS Resolution (DoH)**: Resolve domain to IPs via Google DNS-over-HTTPS
-2. **AbuseIPDB Check**: Query each IP using AbuseIPDB `check` endpoint
-3. **Risk Mapping**: Map Abuse Confidence Score and report counts to statuses
-4. **Aggregation**: Use highest-risk status across all resolved IPs
+1. **Link Discovery**: Content script automatically finds all links on web pages
+2. **Link Filtering**: Skips same-domain links, UI elements, and non-HTTP(S) protocols
+3. **DNS Resolution (DoH)**: Resolves domain names to IP addresses via Google DNS-over-HTTPS
+4. **IP Reputation Check**: Queries each resolved IP using AbuseIPDB API to check for reported abuse
+5. **Risk Assessment**: Maps Abuse Confidence Score and report counts to safety statuses:
+   - **DANGER**: Score ≥ 25 or ≥ 3 reports (high risk)
+   - **WARN**: Score > 0 or reports > 0 (medium risk)
+   - **SAFE**: No reports found (low risk)
+6. **Status Aggregation**: Uses the highest-risk status across all resolved IPs for a domain
+7. **Visual Indicators**: Displays colored badges next to links based on risk assessment
+8. **Caching**: Results are cached locally for 6 hours to reduce API calls and improve performance
 
-### Security Tips
+### Link Scanning Features
+
+- **Automatic Scanning**: Scans links as pages load
+- **Dynamic Content**: Monitors for dynamically added links using MutationObserver
+- **Smart Filtering**: Ignores navigation links, UI buttons, and small/invisible elements
+- **Real-time Updates**: Badges update as scan results become available
+- **Overlay Statistics**: Keyboard shortcut (Ctrl+Shift+X) shows overall page security stats
+
+### Security Tips System
 
 - Rotating collection of cybersecurity best practices
-- Categorized by security type (Email, Web, Password, etc.)
-- Updated regularly with new insights
-- Designed for non-technical users
+- Categorized by security type (Email, Web, Password, Multi-factor Authentication, etc.)
+- Displayed randomly in popup and overlay
+- Updated regularly with new security insights
+- Designed for non-technical users with simple, actionable advice
+
+### AI Chatbot (CyvexBot) Functionality
+
+- **Context Awareness**: Knows current page scan results (safe/warning/danger counts)
+- **Intelligent Responses**: Uses Google Gemini Pro to provide helpful, conversational answers
+- **Training Focus**: Specialized prompts for security education and phishing detection
+- **Quick Actions**: Pre-configured buttons for common questions
+- **Local Storage**: Conversation history stored locally in browser
+- **Privacy-First**: No conversation data sent to third parties except Gemini API for responses
 
 ## Privacy & Security
 
@@ -124,10 +178,12 @@ Cyvex is a Chrome extension designed specifically for Small and Medium Enterpris
 
 ### Threat Intelligence Integration
 
-- Uses AbuseIPDB for IP reputation checks
-- Local caching reduces API calls and latency
-- Fallback to cached results if network unavailable
-- No browsing history is uploaded; only IPs are checked
+- **AbuseIPDB Integration**: Uses AbuseIPDB API for IP reputation checks
+- **Free Tier Available**: Works without API key (limited functionality), optional key for full features
+- **Local Caching**: Results cached for 6 hours to reduce API calls and improve latency
+- **Offline Support**: Falls back to cached results if network is unavailable
+- **Privacy Protection**: No browsing history is uploaded; only resolved IP addresses are checked
+- **Rate Limiting**: Caching prevents excessive API calls and respects AbuseIPDB rate limits
 
 ### AI Training Integration
 
@@ -143,25 +199,28 @@ Cyvex is a Chrome extension designed specifically for Small and Medium Enterpris
 ### Project Structure
 
 ```
-cyvex_2/
-├── manifest.json                    # Extension configuration (Vanilla JS)
-├── background.js                    # Service worker for link checking
+cyvex/
+├── manifest.json                    # Extension configuration
+├── background.js                    # Service worker for link checking & API calls
 ├── content.js                      # Content script for page scanning
-├── popup.html/js/css               # Extension popup interface
-├── options.html/js/css             # Extension settings page
+├── chatbot.js                      # CyvexBot chatbot implementation
+├── popup.html/js/css               # Extension popup interface (Vanilla JS)
+├── options.html/js/css             # Extension settings page (Vanilla JS)
 ├── styles.css                      # Content script styling
+├── chatbot.css                     # Chatbot widget styling
 ├── icons/                          # Extension icons
-├── src/                            # React source files
-│   ├── popup/                      # React popup
-│   ├── options/                    # React options
-│   ├── content/                    # React content script
-│   ├── components/                 # React components
-│   │   └── ChatbotWidget.jsx       # AI chatbot component
-│   └── services/                   # Shared services
-│       └── chatbotService.js       # Gemini API integration
-├── public/                         # React build assets
-├── dist/                           # Built extension (React)
-├── CHATBOT_GUIDE.md               # Chatbot usage guide
+├── src/                            # React source files (optional)
+│   ├── popup/                      # React popup components
+│   │   ├── Popup.jsx              # Main popup component
+│   │   └── Popup.css              # Popup styling
+│   ├── options/                    # React options components
+│   │   ├── Options.jsx            # Main options component
+│   │   └── Options.css            # Options styling
+│   └── ...
+├── public/                         # Public assets
+├── dist/                           # Built extension (from React build)
+├── package.json                    # Node dependencies
+├── vite.config.js                  # Vite build configuration
 └── README.md                       # This file
 ```
 
@@ -178,12 +237,28 @@ npm run build      # Build for production
 
 The built extension will be in the `dist/` folder.
 
+### Configuration
+
+**Optional: AbuseIPDB API Key Setup**
+
+For full threat detection capabilities, you can optionally configure an AbuseIPDB API key:
+
+1. Register for a free account at [AbuseIPDB.com](https://www.abuseipdb.com/register)
+2. Generate an API key from your account dashboard
+3. Click the Cyvex extension icon → ⚙️ Settings
+4. Enter your API key in the settings page
+5. Click "Save Settings"
+
+**Note**: The extension works without an API key, but with limited functionality. Adding a key enables full IP reputation checking.
+
 ### Testing
 
 1. Load the extension in Chrome developer mode
 2. Visit various websites to test link scanning
 3. Check the popup for security status updates
 4. Verify security tips are displayed correctly
+5. Test the chatbot by clicking the purple robot button
+6. Test keyboard shortcut (Ctrl+Shift+X) to toggle security overlay
 
 ## Contributing
 
